@@ -1,10 +1,9 @@
-import { element } from 'protractor';
 // import { HtmlEditorService } from '';
 import { from } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { error } from '@angular/compiler/src/util';
 import * as Editor from '@ckeditor/ckeditor5-angular';
@@ -12,8 +11,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 
 @Component({
@@ -21,6 +18,7 @@ import html2canvas from 'html2canvas';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [ApiService, ToolbarService]
+  // providers: [ApiService]
   
 })
 export class AppComponent {
@@ -33,12 +31,6 @@ export class AppComponent {
 
   public Editor = ClassicEditor;
 
-  navbarOpen = false;
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-  }
-  
   public model = {
     editorData: '<p>Hello, world!</p>'
   };
@@ -123,7 +115,6 @@ export class AppComponent {
     )
   }
 
-
   updateContent = () => {
     this.api.updateContent(this.selectedContent).subscribe(
       data => {
@@ -136,40 +127,6 @@ export class AppComponent {
     )
   }
 
-  createContent = () => {
-    this.api.createContent(this.selectedContent).subscribe(
-      data => {
-        this.contents.push(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
-  deleteContent = (content) => {
-    this.api.deleteContent(this.selectedContent.id).subscribe(
-      data => {
-        this.getContents();
-      },
-      error => {
-        console.log(error);
-      }
-    )
-
-    
-
-  }
-
-  onGoToPage2 = () => {
-    data => {
-      console.log('this is second page');
-    }
-    error => {
-      console.log(error);
-    }
-  }
-
   public onReady(editor) {
     editor.ui.getEditableElement().parentElement.insertBefore(
         editor.ui.view.toolbar.element,
@@ -178,22 +135,16 @@ export class AppComponent {
   } 
 
   // title = 'essenviatest';
-  
-  @ViewChild('pdfContent', {static: true}) pdfContent: ElementRef;
-  public downloadPDF() {    
-    let doc = new jsPDF();
-    let specialElementHandlers = {
-      '#editor': function(element, renderer) {
-        return true;
-      }
-    };
-    let pdfcontent = this.pdfContent.nativeElement;
-    doc.fromHTML(pdfcontent.innerHTML, 15, 15, {
-      'width': 190,
-      'elementHandlers': specialElementHandlers
-    });
-    doc.save('document' + '.pdf');
-
-  }    
-
 }
+
+// export class MyComponent {
+  
+
+//   public onReady(editor) {
+//     editor.ui.getEditableElement().parentElement.insertBefore(
+//         editor.ui.view.toolbar.element,
+//         editor.ui.getEditableElement()
+//     );
+//   }
+//   // ...
+// }

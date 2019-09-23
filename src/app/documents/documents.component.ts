@@ -1,47 +1,62 @@
-import { element } from 'protractor';
-// import { HtmlEditorService } from '';
-import { from } from 'rxjs';
-
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from './api.service';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
 import { error } from '@angular/compiler/src/util';
-import * as Editor from '@ckeditor/ckeditor5-angular';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import { ToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
+import { Title, Meta } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { from } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ApiService } from '../api.service';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-documents',
+  template: `
+    <div class="example-config">
+      <button kendo-button (click)="pdf.saveAs('invoice.pdf')">
+        Save As PDF...
+      </button>
+    </div>
+
+    <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+      <my-invoice [data]="data"></my-invoice>
+    </kendo-pdf-export>
+  `,
+  styles: [`
+    kendo-pdf-export {
+      font-family: "DejaVu Sans", "Arial", sans-serif;
+      font-size: 12px;
+    }
+  `],
+  templateUrl: './documents.component.html',
+  styleUrls: ['./documents.component.css'],
   providers: [ApiService, ToolbarService]
-  
 })
-export class AppComponent {
+export class DocumentsComponent implements OnInit {
 
   contents  = [{title: 'essenviatest'}];
   selectedContent;
   id;
   title;
   description;
+  constructor(
+    private http: HttpClient,
+    private api: ApiService,
+    private titleService : Title,
+    private meta: Meta
+  ) { 
+    titleService.setTitle('Essanvia Test');
+    meta.updateTag({
+      name:'viewport', content:'width=device-width, initial-scale=1'
+      });      
+    
+    this.getContents();
+    this.selectedContent = {id: -1, title:'', description:''}
+   }
 
-  public Editor = ClassicEditor;
-
-  navbarOpen = false;
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
+  ngOnInit() {
   }
-  
-  public model = {
-    editorData: '<p>Hello, world!</p>'
-  };
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -64,43 +79,12 @@ export class AppComponent {
         {class: 'calibri', name: 'Calibri'},
         {class: 'comic-sans-ms', name: 'Comic Sans MS'}
       ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
+      
     uploadUrl: 'v1/image',
     sanitize: true,
     toolbarPosition: 'top',
   }
-  // public StandardEditor = Editor
-  // public Editor = DecoupledEditor;
-  constructor(
-    private http: HttpClient,
-    private api: ApiService,
-    private titleService: Title,
-    private meta: Meta
-  ) {
-    titleService.setTitle('Essanvia Test');
-    meta.updateTag({
-      name:'viewport', content:'width=device-width, initial-scale=1'
-      });      
-    
-    this.getContents();
-    this.selectedContent = {id: -1, title:'', description:''}
-  
-  }
-  
+
   getContents = () => {
     this.api.getAllContent().subscribe(
       data => {
@@ -122,7 +106,6 @@ export class AppComponent {
       }
     )
   }
-
 
   updateContent = () => {
     this.api.updateContent(this.selectedContent).subscribe(
@@ -157,25 +140,7 @@ export class AppComponent {
       }
     )
 
-    
-
   }
-
-  onGoToPage2 = () => {
-    data => {
-      console.log('this is second page');
-    }
-    error => {
-      console.log(error);
-    }
-  }
-
-  public onReady(editor) {
-    editor.ui.getEditableElement().parentElement.insertBefore(
-        editor.ui.view.toolbar.element,
-        editor.ui.getEditableElement()
-    );  
-  } 
 
   // title = 'essenviatest';
   
@@ -194,6 +159,6 @@ export class AppComponent {
     });
     doc.save('document' + '.pdf');
 
-  }    
+  }
 
 }

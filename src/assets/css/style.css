@@ -1,0 +1,139 @@
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+.underline{	padding-bottom:5px;	border-bottom: 1px solid #eee; margin:0 0 20px 0;}/* Add 5px bottom padding and a underline */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+
+body{
+	background:#F9F9F9;
+}
+.wrap{
+	width:80%;
+	margin:0 auto;
+}
+.search-bar,.header-top-nav{
+	float:right;
+}
+.search-bar input[type="text"]{
+	width: 182px;
+	height: 20px;
+	margin-right: 0;
+	color: #666565;
+	background: #fff;
+	padding: 3px 5px 3px 10px;
+	border: 1px solid #e5e5e5;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	margin: 0;
+	outline: none;
+}
+.search-bar input[type="submit"]{
+	margin-right: 0;
+	color: #000;
+	background: #fff;
+	padding: 5px 9px 5px 10px;
+	border: 1px solid #e5e5e5;
+	margin: 0;
+	border-left:none;
+	cursor:pointer;
+	background:#94CB32;
+	font-weight: bold;
+}
+.search-bar input[type="submit"]:hover{
+	background:#181818;
+	color:#fff;
+}
+.search-bar{
+	background:#fff;
+	margin: 20px 0px 12.5px 0px;
+	border-radius:0.3em;
+}
+.header-top-nav ul li{
+	display:inline-block;
+	border-right: 1px solid rgba(122, 120, 120, 0.15);
+	padding: 0px 13px;
+}
+
+.header-top-nav ul li:last-child{
+	border:none;
+	padding-right:0px;
+}
+.header-top-nav ul li a,.header-top-nav{
+	font-family: 'Open Sans', sans-serif;
+	color:#575757;
+	display:inline-block;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+.header-top-nav ul li a:hover{
+	color:#94CB32;
+}
+.header-top-nav ul li a span{
+	color:#D70D87;
+}
+/*---top-header----*/
+.top-header{
+	background: #94CB32;
+	padding: 12px 0px;
+	margin-top: 16px;
+}
+.logo{
+	float:left;
+	margin-top: 4px;
+}
+.top-nav{
+	float:right;
+}
+.top-nav ul li{
+	display:inline-block;
+}
+.top-nav ul li a{
+	display:block;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9em;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px 16px;
+	text-transform: uppercase;
+}
+.top-nav ul li:last-child{
+	padding-right:0px;
+}
+.top-nav ul li a:hover{
+	color:#000;
+}
+
+.te-basic-tools .angular-editor-button[title="Subscript"], .angular-editor-button[title="Strikethrough"],
+.te-basic-tools .angular-editor-button[title="Text Color"] {
+   display: none;
+}
+
+.te-basic-tools .angular-editor-button[title="Justify Left"], .angular-editor-button[title="Justify Center"], .angular-editor-button[title="Justify Right"], .angular-editor-button[title="Justify Full"]  {
+ display: none;
+}
+
+.te-basic-tools .angular-editor-button[title="Indent"], .angular-editor-button[title="Outdent"], .angular-editor-button[title="Unordered List"], .angular-editor-button[title="Ordered List"], .angular-editor-button[title="Insert Image"], .angular-editor-button[title="Insert Video"], .angular-editor-button[title="Horizontal Line"],.angular-editor-button[title="Clear Formatting"], .angular-editor-button[title="HTML Code"], .angular-editor-button[title="Insert Link"], .angular-editor-button[title="Unlink"], .angular-editor-button[title="Background Color"]  {
+	display: none;
+}
+
+
+

@@ -1,0 +1,36 @@
+<div>
+<h2>List of Contents</h2>
+</div>
+<div>
+<ul>
+    <li *ngFor="let content of contents">
+        <input type="checkbox" (click)="contentClicked(content)" (change)="show = !show" ng-model="show" /> {{ content.title }}   
+    </li>
+</ul>
+    <hr>
+    <div *ngIf="show" id="divshow">
+        <button (click)="updateContent()"><i class="fa fa-pencil" title="edit" aria-hidden="true"></i></button>
+        <button (click)="createContent()"><i class="fa fa-plus" title="add" aria-hidden="true"></i></button>
+        <button (click)="deleteContent()"><i class="fa fa-trash" title="delete" aria-hidden="true"></i></button>
+        <button kendo-button (click)="pdf.saveAs('documents.pdf')"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+        <br>
+    
+        Title <input type="text" [(ngModel)]="selectedContent.title" readonly /> <br> 
+        Description:
+        <angular-editor [config]="editorConfig" [(ngModel)]="selectedContent.description" class="te-basic-tools"></angular-editor>   
+        
+        <!-- <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+            <textarea [(ngModel)]="selectedContent.description" cols="100" rows="10"></textarea>            
+        </kendo-pdf-export> -->
+        <br>               
+    </div>
+    
+    
+        
+</div>
+
+
+
+
+
+
